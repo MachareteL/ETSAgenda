@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import LoginView from '../views/LoginView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import LoginView from '../views/LoginView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,12 +19,16 @@ const router = createRouter({
       component: LoginView
     }
   ]
-})
+});
 
-router.beforeEach((to, from) => {
-  if (to.meta?.auth) {
-    
-  }
-})
+// router.beforeEach(async (to, from) => {
+//   const isAuthenticated = to.meta
+//   if (!isAuthenticated &&
+//     !to.meta.auth
+//   ) {
+//     // redirect the user to the login page
+//     return { name: 'Login' };
+//   }
+// });
 
-export default router
+export default router;
