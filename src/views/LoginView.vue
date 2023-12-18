@@ -10,10 +10,14 @@
     axios
       .post('http://localhost:8081/login', { usuario, senha })
       .then(({ data }) => {
-        console.log(data);
+        const token = data.tokenJWT
+        if(token){
+          console.log(token);
+          
+        }
       })
       .catch((err) => {
-        console.log(err.response.data);
+        alert(err.response.data);
       });
   }
 </script>
