@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  const teste = 'teste';
+
 </script>
 
 <template>
@@ -7,10 +7,12 @@
     <router-link
       to="/reclass"
       class="font-light rounded-md px-4 py-4 border border-gray-400 shadow-sm hover:shadow-gray-300"
-      >Turmas</router-link>
+      >Turmas</router-link
+    >
     <router-link
       to="/upload"
       class="font-light rounded-md px-4 py-4 border border-gray-400 shadow-sm hover:shadow-gray-300"
-      >Cadastrar Eventos</router-link>
+      >Cadastrar Eventos</router-link
+    >
   </div>
 </template>
