@@ -1,3 +1,3 @@
 import axios from "axios";
 
-export const api = axios.create({baseURL: 'http://localhost:8000'}); // server uri
+export const api = axios.create({baseURL: 'http://localhost:8081'}); // server uri

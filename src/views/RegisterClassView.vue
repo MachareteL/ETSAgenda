@@ -1,11 +1,10 @@
 <script setup lang="ts">
-  import axios from 'axios';
   import { ref } from 'vue';
-  import { api } from '../lib/adapters';
+  import { api } from '@/lib/adapters';
   const event = ref();
   function login() {
     api
-      .post('http://localhost:8081/eventos', event)
+      .post('/eventos', event)
       .then(({ data }) => {
         const token = data.tokenJWT;
         if (token) {

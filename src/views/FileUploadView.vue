@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import exceljs from 'exceljs';
   import { ref } from 'vue';
-  import axios from 'axios';
+  import { api } from '@/lib/adapters';
   const fileInput = ref<HTMLInputElement>();
   const Workbook = new exceljs.Workbook();
 
@@ -12,8 +12,8 @@
       const formData = new FormData();
       formData.append('file', file, file.name);
       formData.append('user', '1');
-      axios
-        .postForm('http://localhost:8081/eventos/upload', formData)
+      api
+        .postForm('/eventos/upload', formData)
         .then(({ data }) => {
           console.log(data);
         })

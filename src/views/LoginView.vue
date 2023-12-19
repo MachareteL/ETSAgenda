@@ -1,19 +1,21 @@
 <script setup lang="ts">
-  import axios from 'axios';
+  import { api } from '@/lib/adapters';
   import { ref } from 'vue';
+  import { useRouter } from 'vue-router'
 
+  const router = useRouter()
   const form = ref();
 
   function login() {
     const usuario = form.value[0].value;
     const senha = form.value[1].value;
-    axios
-      .post('http://localhost:8081/login', { usuario, senha })
+    api
+      .post('/login', { usuario, senha })
       .then(({ data }) => {
-        const token = data.tokenJWT
+        const token = data.tokenJWT as string
         if(token){
-          console.log(token);
-          
+          localStorage.setItem("token", token)
+          router.push("reclass")
         }
       })
       .catch((err) => {
