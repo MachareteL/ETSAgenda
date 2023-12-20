@@ -16,7 +16,7 @@
   ];
   const events = [
     {
-      start: '2023-11-19 10:35',
+      start: '2023-12-19 10:35',
       end: '2023-11-19 11:30',
       title: 'Doctor appointment',
       content: '<i class="icon material-icons">local_hospital</i>',
@@ -24,7 +24,7 @@
       split: 1 // Has to match the id of the split you have set (or integers if none).
     },
     {
-      start: '2023-11-19 18:30',
+      start: '2023-12-19 18:30',
       end: '2023-11-19 19:15',
       title: 'Dentist appointment',
       content: '<i class="icon material-icons">local_hospital</i>',
@@ -32,7 +32,7 @@
       split: 2
     },
     {
-      start: '2023-11-20 18:30',
+      start: '2023-12-20 18:30',
       end: '2023-11-20 20:30',
       title: 'Crossfit',
       content: '<i class="icon material-icons">fitness_center</i>',

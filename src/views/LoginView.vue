@@ -15,7 +15,7 @@
         const token = data.tokenJWT as string
         if(token){
           localStorage.setItem("token", token)
-          router.push("reclass")
+          router.push("landing")
         }
       })
       .catch((err) => {

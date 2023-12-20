@@ -4,6 +4,7 @@ import LoginView from '@/views/LoginView.vue';
 import FileUploadViewVue from '@/views/FileUploadView.vue';
 import AdminLandingViewVue from '@/views/AdminLandingView.vue';
 import { useUserStore } from '@/stores/counter';
+import RegisterClassViewVue from '@/views/RegisterClassView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,7 +36,7 @@ const router = createRouter({
     {
       path: '/reclass',
       name: 'reclass',
-      component: FileUploadViewVue,
+      component: RegisterClassViewVue,
       meta: {
         auth: true
       }

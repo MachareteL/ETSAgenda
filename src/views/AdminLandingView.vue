@@ -14,5 +14,10 @@
       class="font-light rounded-md px-4 py-4 border border-gray-400 shadow-sm hover:shadow-gray-300"
       >Cadastrar Eventos</router-link
     >
+    <router-link
+      to="/upload"
+      class="font-light rounded-md px-4 py-4 border border-gray-400 shadow-sm hover:shadow-gray-300"
+      >Cadastrar Evento individual</router-link
+    >
   </div>
 </template>
