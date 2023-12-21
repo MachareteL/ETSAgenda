@@ -11,11 +11,7 @@ export const useUserStore = defineStore('user', () => {
   async function getUserToken() {
     const token = localStorage.getItem('token');
     // logica para ver se o token está válido
-    // const isTokenValid = await api.post('/validar', { token });
     
-    // if (!isTokenValid) {
-    //   return null
-    // }
     return token;
   }
 

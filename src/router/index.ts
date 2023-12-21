@@ -5,6 +5,7 @@ import FileUploadViewVue from '@/views/FileUploadView.vue';
 import AdminLandingViewVue from '@/views/AdminLandingView.vue';
 import { useUserStore } from '@/stores/counter';
 import RegisterClassViewVue from '@/views/RegisterClassView.vue';
+import { api } from '@/lib/adapters';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -53,11 +54,17 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to) => {
-  const userStore = useUserStore()
-  const isAuthenticated = userStore.getUserToken();
-  if (!isAuthenticated && to.meta.auth) {
-    // redirect the user to the login page
-    return { path: '/login' };
+  if (to.meta.auth) {
+    const userStore = useUserStore();
+    const userToken = await userStore.getUserToken();
+    if (!userToken) {
+      return { path: '/login' };
+    }
+    const isTokenValid = await api.post('/login/validarToken', { tokenJWT: userToken });
+
+    if (!isTokenValid) {
+      return { path: '/login' };
+    }
   }
 });
 
