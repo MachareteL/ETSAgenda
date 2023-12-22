@@ -5,10 +5,10 @@ import exceljs from 'exceljs';
   const fileInput = ref<HTMLInputElement>();
   const workbook = new exceljs.Workbook();
   const fileReader = new FileReader();
-  const tableRows = ref<TableRow[]>([]);
+  const tableRows = ref<PreviewTableRow[]>([]);
 
   async function renderTable() {
-    const rows: Array<TableRow>[] = [];
+    const rows: Array<PreviewTableRow>[] = [];
     if (fileInput.value?.files && fileInput.value?.files[0]) {
       fileReader.readAsArrayBuffer(fileInput.value.files[0]);
       fileReader.onload = async (ev) => {
@@ -16,7 +16,7 @@ import exceljs from 'exceljs';
         const worksheet = await workbook.xlsx.load(result as ArrayBuffer);
         worksheet.eachSheet((sheet) => {
           sheet.eachRow((row) => {
-            const items = Array.from(row.values as unknown as Array<TableRow>);
+            const items = Array.from(row.values as unknown as Array<PreviewTableRow>);
             items.shift();
             rows.push(items);
           });
@@ -33,7 +33,7 @@ import exceljs from 'exceljs';
             turma: row[6]
           };
 
-          tableRows.value.push(event as unknown as TableRow);
+          tableRows.value.push(event as unknown as PreviewTableRow);
         }
         console.log(tableRows.value);
         tableRows.value.shift();
@@ -50,7 +50,7 @@ import exceljs from 'exceljs';
       api
         .postForm('/eventos/upload', formData)
         .then(({ data }) => {
-          console.log(data);
+          alert("Eventos cadastrados com sucesso!")
         })
         .catch((err) => {
           console.log(err);

@@ -1,10 +1,15 @@
 <script setup lang="ts">
+  import { api } from '@/lib/adapters';
+  import { onMounted, ref } from 'vue';
   import VueCal from 'vue-cal';
   import 'vue-cal/dist/vuecal.css';
 
   const stickySplitLabels = false;
   const minCellWidth = 400;
   const minSplitWidth = 100;
+
+  const eventsRef = ref<CalendarEvent[]>([]);
+
   const splitDays = [
     // The id property is added automatically if none (starting from 1), but you can set a custom one.
     // If you need to toggle the splits, you must set the id explicitly.
@@ -23,23 +28,25 @@
       class: 'health',
       split: 1 // Has to match the id of the split you have set (or integers if none).
     },
-    {
-      start: '2023-12-19 18:30',
-      end: '2023-11-19 19:15',
-      title: 'Dentist appointment',
-      content: '<i class="icon material-icons">local_hospital</i>',
-      class: 'health',
-      split: 2
-    },
-    {
-      start: '2023-12-20 18:30',
-      end: '2023-11-20 20:30',
-      title: 'Crossfit',
-      content: '<i class="icon material-icons">fitness_center</i>',
-      class: 'sport',
-      split: 1
-    }
   ];
+  onMounted(async () => {
+    const { data } = await api.get('eventos');
+    const events = data.content as BackendEvent[];
+
+    for (let index = 0; index < events.length; index++) {
+      const currentEvent = events[index];
+      eventsRef.value.push({
+        start: currentEvent.data_inicio,
+        end: currentEvent.data_fim,
+        title: currentEvent.titulo,
+        class: '',
+        content: '',
+        split: ''
+      });
+    }
+    console.log(eventsRef.value);
+    
+  });
 </script>
 
 <template>
