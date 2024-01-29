@@ -1,26 +1,31 @@
 <script setup lang="ts">
-  import { api } from '@/lib/adapters';
-  import { onMounted, ref } from 'vue';
-  import { useRouter } from 'vue-router';
-  const teams = ref<Team[]>([]);
-  const newTeamForm = ref();
-  const { go } = useRouter();
-  
-  onMounted(async () => {
-    const { data } = await api.get('/turma');
-    const turmas = data.content as Team[];
+    import { api } from '@/lib/adapters';
+  import type { AxiosError } from 'axios';
+    import { onMounted, ref } from 'vue';
+    import { useRouter } from 'vue-router';
+    const teams = ref<Team[]>([]);
+    const newTeamForm = ref();
+    const { go } = useRouter();
 
-    turmas.forEach(({ nome, turno }) => {
-      teams.value.push({ nome, turno });
+    onMounted(async () => {
+      const { data } = await api.get('/turma');
+      const turmas = data.content as Team[];
+
+      turmas.forEach(({ nome, turno }) => {
+        teams.value.push({ nome, turno });
+      });
     });
-  });
 
-  async function registerNewTeam() {
-    const nome = newTeamForm.value[0].value;
-    const turno = newTeamForm.value[1].value;
-    await api.post('/turma', { nome, turno });
-    go(0);
-  }
+    async function registerNewTeam() {
+      const nome = newTeamForm.value[0].value;
+      const turno = newTeamForm.value[1].value;
+      try {
+        await api.post('/turma', { nome, turno });
+      } catch (err) {
+        alert((err as AxiosError).response?.data);
+      }
+      go(0);
+    }
 </script>
 
 <template>
@@ -36,7 +41,7 @@
           <label for="turno">Turno da Turma: </label>
           <input type="text" name="turno" id="turno" class="text-black py-px px-2" />
         </div>
-        <input type="submit" value="Cadastrar" class="border px-2 py-1 rounded-md" />
+        <input type="submit" value="Cadastrar" class="border px-2 py-1 rounded-md cursor-pointer" />
       </form>
     </div>
   </div>

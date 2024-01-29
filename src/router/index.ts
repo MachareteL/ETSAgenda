@@ -3,7 +3,7 @@ import HomeView from '@/views/HomeView.vue';
 import LoginView from '@/views/LoginView.vue';
 import FileUploadViewVue from '@/views/FileUploadView.vue';
 import AdminLandingViewVue from '@/views/AdminLandingView.vue';
-import { useUserStore } from '@/stores/counter';
+import { useUserStore } from '@/stores/user';
 import RegisterClassViewVue from '@/views/RegisterClassView.vue';
 import { api } from '@/lib/adapters';
 
@@ -60,9 +60,9 @@ router.beforeEach(async (to) => {
     if (!userToken) {
       return { path: '/login' };
     }
-    const isTokenValid = await api.post('/login/validarToken', { tokenJWT: userToken });
-
-    if (!isTokenValid) {
+    try {
+      await api.post('/login/validarToken', { tokenJWT: userToken });
+    } catch (err) {
       return { path: '/login' };
     }
   }

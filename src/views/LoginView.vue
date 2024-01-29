@@ -36,7 +36,7 @@
       </div>
       <div class="flex flex-col">
         <label for="password">Password</label>
-        <input type="text" name="password" id="password" class="text-black px-2 py-px" />
+        <input type="password" name="password" id="password" class="text-black px-2 py-px" />
       </div>
       <input
         type="submit"
